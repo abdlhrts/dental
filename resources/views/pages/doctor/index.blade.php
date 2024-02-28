@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('User') }}
+            {{ __('Doctor') }}
         </h2>
     </x-slot>
 
@@ -18,7 +18,7 @@
                                 <p class="text-gray-500 dark:text-gray-400">Manage all your existing users or
                                     add a new one</p>
                             </div>
-                            <a href="{{ route('user.create') }}"
+                            <a href="{{ route('doctor.create') }}"
                                 class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1"
                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -35,7 +35,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-7xl">
-                    @livewire('user.list-user')
+                    @livewire('doctor.list-doctor')
                 </div>
             </div>
         </div>

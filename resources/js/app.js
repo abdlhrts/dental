@@ -1,5 +1,6 @@
 // import "./bootstrap";
 import "flowbite";
+import "./dark-mode.js";
 
 import Alpine from "alpinejs";
 import focus from "@alpinejs/focus";
