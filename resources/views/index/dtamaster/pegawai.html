@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Obat</title>
+        <title>Pegawai</title>
         <link
             href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
             rel="stylesheet"
@@ -976,7 +976,7 @@
                                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                                     />
                                 </svg>
-                                Tambah Obat
+                                Tambah Pegawai
                             </button>
                             <div
                                 class="flex items-center space-x-3 w-full md:w-auto"
@@ -2590,7 +2590,7 @@
                         <h3
                             class="text-lg font-semibold text-gray-900 dark:text-white"
                         >
-                            Tambah Obat
+                            Tambah Pegawai
                         </h3>
                         <button
                             type="button"
@@ -2621,14 +2621,14 @@
                                 <label
                                     for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >Kode</label
+                                    >Nama</label
                                 >
                                 <input
                                     type="text"
                                     name="name"
                                     id="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Input Kode"
+                                    placeholder="Input Nama"
                                     required=""
                                 />
                             </div>
@@ -2636,33 +2636,48 @@
                                 <label
                                     for="brand"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >Nama Obat</label
+                                    >Nomor Handphone</label
                                 >
                                 <input
-                                    type="text"
+                                    type="number"
                                     name="brand"
                                     id="brand"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Input Nama Obat"
+                                    placeholder="Input Nomor Handphone"
                                     required=""
                                 />
                             </div>
                             <div>
                                 <label
-                                    for="price"
+                                    for="brand"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    >Email</label
+                                >
+                                <input
+                                    type="email"
+                                    name="brand"
+                                    id="brand"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="Input Email"
+                                    required=""
+                                />
+                            </div>
+                            <!-- <div>
+                                <label
+                                    for=""
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >Harga Beli</label
                                 >
                                 <input
                                     type="number"
-                                    name="price"
-                                    id="price"
+                                    name=""
+                                    id=""
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="IDR"
                                     required=""
                                 />
-                            </div>
-                            <div>
+                            </div> -->
+                            <!-- <div>
                                 <label
                                     for="price"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -2676,8 +2691,8 @@
                                     placeholder="IDR"
                                     required=""
                                 />
-                            </div>
-                            <div>
+                            </div> -->
+                            <!-- <div>
                                 <label
                                     for="price"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -2691,36 +2706,34 @@
                                     placeholder="Input Stock"
                                     required=""
                                 />
-                            </div>
+                            </div> -->
                             <div>
                                 <label
                                     for="category"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >Jenis</label
+                                    >Jabatan</label
                                 ><select
                                     id="category"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 >
-                                    <option selected="">
-                                        Select Jenis Obat
-                                    </option>
-                                    <option value="TV">Obat Racik</option>
-                                    <option value="PC">Vitamin</option>
-                                    <option value="GA">Obat Tablet</option>
-                                    <option value="PH">Obat Sirup</option>
+                                    <option selected="">Select Jabatan</option>
+                                    <option value="TV">Dokter</option>
+                                    <option value="PC">Asisten Dokter</option>
+                                    <option value="GA">Suster</option>
+                                    <option value="PH">OB</option>
                                 </select>
                             </div>
                             <div class="sm:col-span-2">
-                                <!-- <label
+                                <label
                                     for="description"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >Description</label
+                                    >Alamat Rumah</label
                                 ><textarea
                                     id="description"
                                     rows="4"
                                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Tulis Deskripsi disini"
-                                ></textarea> -->
+                                    placeholder="Input Alamat Rumah Disini"
+                                ></textarea>
                             </div>
                         </div>
                         <button
@@ -2739,7 +2752,7 @@
                                     clip-rule="evenodd"
                                 />
                             </svg>
-                            Tambah Obat
+                            Tambah Pegawai
                         </button>
                     </form>
                 </div>
