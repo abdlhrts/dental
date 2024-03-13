@@ -2,18 +2,13 @@
 
 namespace App\Livewire\User;
 
-use Filament\Forms;
 use App\Models\User;
-use Livewire\Component;
-use Filament\Forms\Form;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Hash;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Forms\Components\MarkdownEditor;
-use Illuminate\Validation\ValidationException;
+use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
+use Livewire\Component;
+use Illuminate\Contracts\View\View;
 
 class CreateUser extends Component implements HasForms
 {
@@ -30,48 +25,33 @@ class CreateUser extends Component implements HasForms
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->autocomplete(false)
-                    ->required(),
-                TextInput::make('email')
-                    ->autocomplete(false)
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
                     ->email()
-                    ->required(),
-                Forms\Components\DatePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->autocomplete(false)
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\TextInput::make('password')
                     ->password()
-                    ->revealable()
-                    ->required(),
-                // ...
+                    ->required()
+                    ->maxLength(255),
             ])
-            ->columns(2)
-            ->statePath('data');
-    }
-
-    protected function onValidationError(ValidationException $exception): void
-    {
-        Notification::make()
-            ->title($exception->getMessage())
-            ->danger()
-            ->send();
+            ->statePath('data')
+            ->model(User::class);
     }
 
     public function create(): void
     {
-        User::create([
-            'name'      => $this->form->getState()['name'],
-            'email'     => $this->form->getState()['email'],
-            'password'  => Hash::make($this->form->getState()['password']),
-        ]);
-        Notification::make()
-            ->title('Saved successfully')
-            ->success()
-            ->send();
-        redirect()->route('user.index');
+        $data = $this->form->getState();
+
+        $record = User::create($data);
+
+        $this->form->model($record)->saveRelationships();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.user.create-user');
     }

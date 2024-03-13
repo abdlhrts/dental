@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\View;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\ImageColumn;
 use Livewire\Component;
 
 class ListUser extends Component implements HasForms, HasTable
@@ -23,12 +24,17 @@ class ListUser extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::doesntHave('doctor'))
+            ->query(User::query())
             ->columns([
+                ImageColumn::make('profile.image'),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
+                TextColumn::make('profile.phone_number')
+                    ->label('No. Telepon')
+                    ->searchable()
+                    ->prefix('+62'),
             ])
             ->filters([
                 // ...
@@ -36,11 +42,14 @@ class ListUser extends Component implements HasForms, HasTable
             ->actions([
                 // ...
                 Action::make('edit')
+                    ->icon('heroicon-o-pencil')
+                    ->color('info')
                     ->url(fn (User $record): string => route('user.edit', $record)),
                 Action::make('delete')
-                    ->color('red')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn (Post $record) => $record->delete())
+                    ->action(fn (User $record) => $record->delete())
             ])
             ->bulkActions([
                 // ...

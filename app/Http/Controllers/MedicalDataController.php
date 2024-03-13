@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicalData;
 use Illuminate\Http\Request;
 
-class DoctorController extends Controller
+class MedicalDataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +13,6 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        return view('pages.doctor.index');
     }
 
     /**
@@ -21,7 +21,6 @@ class DoctorController extends Controller
     public function create()
     {
         //
-        return view('pages.doctor.create');
     }
 
     /**
@@ -35,7 +34,7 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MedicalData $medicalData)
     {
         //
     }
@@ -43,7 +42,7 @@ class DoctorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(MedicalData $medicalData)
     {
         //
     }
@@ -51,7 +50,7 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, MedicalData $medicalData)
     {
         //
     }
@@ -59,7 +58,7 @@ class DoctorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MedicalData $medicalData)
     {
         //
     }

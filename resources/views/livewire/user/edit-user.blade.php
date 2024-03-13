@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit="create">
+    <form wire:submit="save">
         {{ $this->form }}
 
         <x-primary-button type="submit" class="mt-5">Submit</x-primary-button>
