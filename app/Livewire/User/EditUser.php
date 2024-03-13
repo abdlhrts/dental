@@ -28,14 +28,6 @@ class EditUser extends Component implements HasForms
         return $form
             ->schema([
                 //
-                Forms\Components\Fieldset::make('Profile')
-                    ->relationship('profile')
-                    ->schema([
-                        Forms\Components\FileUpload::make('image')
-                            ->image()
-                            ->avatar()
-                            ->directory('profile-picture')
-                    ]),
                 Forms\Components\Fieldset::make('Informasi User')
                     ->schema([
                         Forms\Components\TextInput::make('name')
@@ -61,7 +53,6 @@ class EditUser extends Component implements HasForms
     public function save(): void
     {
         $data = $this->form->getState();
-
         $this->record->update($data);
     }
 
