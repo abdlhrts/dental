@@ -6,33 +6,32 @@ use Filament\Forms;
 use App\Models\Patient;
 use Livewire\Component;
 use Filament\Forms\Form;
+use Filament\Actions;
 use Illuminate\Contracts\View\View;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Contracts\HasActions;
 use Filament\Notifications\Notification;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Actions\Concerns\InteractsWithActions;
 
-class CreatePatient extends Component implements HasForms
+class CreatePatient extends Component implements HasForms, HasActions
 {
+    use InteractsWithActions;
     use InteractsWithForms;
 
-    public ?array $data = [];
-
-    public function mount(): void
+    public function createAction()
     {
-        $this->form->fill();
-    }
-
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-                Forms\Components\Grid::make([
-                    'lg' => 2
-                ])
+        return Actions\CreateAction::make('create')
+            ->label('New Patient')
+            ->icon('heroicon-o-users')
+            ->color('success')
+            ->model(Patient::class)
+            ->steps([
+                Forms\Components\Wizard\Step::make('Data Pasien')
+                    ->description('Deskripsi')
                     ->schema([
                         Forms\Components\Fieldset::make('Data Pasien')
-                            ->columns(1)
+                            ->columns(2)
                             ->columnSpan(1)
                             ->schema([
                                 Forms\Components\TextInput::make('medical_record_number')
@@ -61,10 +60,13 @@ class CreatePatient extends Component implements HasForms
                                 Forms\Components\Textarea::make('address')
                                     ->required(),
                             ]),
+                    ]),
+                Forms\Components\Wizard\Step::make('Medical Record')
+                    ->description('Medical Record')
+                    ->schema([
                         Forms\Components\Fieldset::make('Data Medik')
                             ->relationship('medical_data')
-                            ->columns(1)
-                            ->columnSpan(1)
+                            ->columns(2)
                             ->schema([
                                 Forms\Components\Select::make('blood_type')
                                     ->options([
@@ -106,22 +108,16 @@ class CreatePatient extends Component implements HasForms
                             ])
                     ])
             ])
-            ->statePath('data')
-            ->model(Patient::class);
-    }
+            ->action(function (array $data): void {
+                $record = Patient::create($data);
 
-    public function create(): void
-    {
-        $data = $this->form->getState();
+                $this->form->model($record)->saveRelationships();
 
-        $record = Patient::create($data);
-
-        $this->form->model($record)->saveRelationships();
-
-        Notification::make()
-            ->title('Update successfully')
-            ->success()
-            ->send();
+                Notification::make()
+                    ->title('Saved successfully')
+                    ->success()
+                    ->send();
+            });
     }
 
     public function render(): View

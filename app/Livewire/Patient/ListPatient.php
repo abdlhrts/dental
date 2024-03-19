@@ -32,10 +32,20 @@ class ListPatient extends Component implements HasForms, HasTable
                 Tables\Columns\TextColumn::make('phone_number')
                     ->searchable()
                     ->prefix('+62'),
-                Tables\Columns\TextColumn::make('gender'),
+                Tables\Columns\TextColumn::make('gender')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'male'      => 'success',
+                        'female'    => 'rose',
+                    }),
             ])
             ->filters([
                 //
+                Tables\Filters\SelectFilter::make('gender')
+                    ->options([
+                        'male'      => 'Male',
+                        'female'    => 'Female',
+                    ])
             ])
             ->actions([
                 //

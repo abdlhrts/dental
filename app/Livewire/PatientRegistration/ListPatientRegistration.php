@@ -29,22 +29,6 @@ class ListPatientRegistration extends Component implements HasForms, HasTable
             ->filters([
                 //
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make()
-                    ->label("New Registration")
-                    ->color('success')
-                    ->icon('heroicon-o-plus-circle')
-                    ->form([
-                        Forms\Components\Grid::make(2)
-                            ->schema([
-                                Forms\Components\TextInput::make('registration_number'),
-                                Forms\Components\Select::make('patient_id')
-                                    ->relationship(name: 'patient', titleAttribute: 'name')
-                                    ->searchable()
-                                    ->preload()
-                            ])
-                    ]),
-            ])
             ->actions([
                 //
             ])

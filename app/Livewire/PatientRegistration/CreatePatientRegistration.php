@@ -8,7 +8,7 @@ use App\Models\User;
 use Livewire\Component;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Actions\Action;
+use Filament\Actions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
 
@@ -17,9 +17,9 @@ class CreatePatientRegistration extends Component implements HasForms, HasAction
     use InteractsWithActions;
     use InteractsWithForms;
 
-    public function createAction(): Action
+    public function createAction()
     {
-        return Action::make('createPatientRegistration')
+        return Actions\CreateAction::make('create')
             ->form([
                 Forms\Components\TextInput::make('name'),
             ])
