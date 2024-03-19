@@ -24,12 +24,25 @@ class ListPatient extends Component implements HasForms, HasTable
             ->query(Patient::query())
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('medical_record_number'),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('nik')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone_number')
+                    ->searchable()
+                    ->prefix('+62'),
+                Tables\Columns\TextColumn::make('gender'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 //
+                Tables\Actions\Action::make('edit')
+                    ->icon('heroicon-o-pencil')
+                    ->color('info')
+                    ->url(fn (Patient $record): string => route('patient.edit', $record))
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MedicalData extends Model
+class PatientRegistration extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'], $table = 'medical_datas';
+    protected $guarded = ['id'];
 
     /**
-     * Get the patient that owns the MedicalData
+     * Get the patient that owns the PatientRegistration
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -13,8 +14,13 @@ class PatientController extends Controller
         return view('pages.patient.index');
     }
 
-    function create()
+    public function create()
     {
         return view('pages.patient.create');
+    }
+
+    public function edit(Patient $patient)
+    {
+        return view('pages.patient.edit', compact('patient'));
     }
 }

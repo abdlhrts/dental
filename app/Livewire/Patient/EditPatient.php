@@ -11,15 +11,18 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Forms\Concerns\InteractsWithForms;
 
-class CreatePatient extends Component implements HasForms
+class EditPatient extends Component implements HasForms
 {
     use InteractsWithForms;
 
     public ?array $data = [];
 
-    public function mount(): void
+    public $record;
+
+    public function mount($record): void
     {
-        $this->form->fill();
+        $this->record = $record;
+        $this->form->fill($this->record->attributesToArray());
     }
 
     public function form(Form $form): Form
@@ -107,16 +110,14 @@ class CreatePatient extends Component implements HasForms
                     ])
             ])
             ->statePath('data')
-            ->model(Patient::class);
+            ->model($this->record);
     }
 
-    public function create(): void
+    public function save(): void
     {
         $data = $this->form->getState();
 
-        $record = Patient::create($data);
-
-        $this->form->model($record)->saveRelationships();
+        $this->record->update($data);
 
         Notification::make()
             ->title('Update successfully')
@@ -126,6 +127,6 @@ class CreatePatient extends Component implements HasForms
 
     public function render(): View
     {
-        return view('livewire.patient.create-patient');
+        return view('livewire.patient.edit-patient');
     }
 }

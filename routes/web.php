@@ -27,14 +27,22 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth')->group(function () {
+    // Administrator
+    Route::get('/setting', [App\Http\Controllers\WebsiteSettingController::class, 'index'])->name('website-setting.index');
+
+    Route::get('/master-data', function () {
+        return view('pages.master-data.index');
+    })->name('master-data.index');
+
+    Route::view('/patient-registration', 'pages.patient-registration.index')->name('patient-registration.index');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('user', App\Http\Controllers\UserController::class);
 
-    Route::get('/patient', [App\Http\Controllers\PatientController::class, 'index'])->name('patient.index');
-    Route::get('/patient/create', [App\Http\Controllers\PatientController::class, 'create'])->name('patient.create');
+    Route::resource('patient', App\Http\Controllers\PatientController::class);
 });
 
 require __DIR__ . '/auth.php';

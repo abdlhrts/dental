@@ -5,8 +5,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <a href="{{ route('dashboard') }}" class="flex items-center">
+                        <x-application-logo
+                            class="block h-6 sm:h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-name />
                     </a>
                 </div>
 
@@ -14,6 +16,13 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('master-data.index')" :active="request()->routeIs('master-data.index')">
+                        {{ __('Master Data') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('patient-registration.index')"
+                        :active="request()->routeIs('patient-registration.index')">
+                        {{ __('Patient Registration') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -162,7 +171,7 @@
                                 Profile
                             </div>
                         </a>
-                        <a href="#"
+                        <a href="{{ route('website-setting.index') }}"
                             class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
                             <svg aria-hidden="true"
                                 class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"

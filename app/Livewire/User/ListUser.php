@@ -9,6 +9,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
+use Filament\Tables;
 use Illuminate\Contracts\View\View;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -26,18 +27,42 @@ class ListUser extends Component implements HasForms, HasTable
         return $table
             ->query(User::query())
             ->columns([
-                ImageColumn::make('profile.image'),
+                ImageColumn::make('profile.image')
+                    ->label('Profile Picture'),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
+                TextColumn::make('email_verified_at')
+                    ->searchable(),
                 TextColumn::make('profile.phone_number')
-                    ->label('No. Telepon')
+                    ->label('Phone number')
                     ->searchable()
                     ->prefix('+62'),
+                TextColumn::make('profile.title')
+                    ->label('Title')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Super Admin' => 'info',
+                        'Doctor' => 'success',
+                        'Nurse' => 'warning',
+                        'Employee' => 'gray',
+                        'User' => 'danger',
+                    }),
             ])
             ->filters([
                 // ...
+                Tables\Filters\SelectFilter::make('title')
+                    ->options([
+                        'Super Admin' => 'Super Admin',
+                        'Doctor' => 'Doctor',
+                        'Nurse' => 'Nurse',
+                        'Employee' => 'Employee',
+                        'User' => 'User',
+                    ])
+                    ->attribute('profile.title'),
+                Tables\Filters\TernaryFilter::make('email_verified_at')
+                    ->nullable()
             ])
             ->actions([
                 // ...
@@ -54,7 +79,20 @@ class ListUser extends Component implements HasForms, HasTable
             ->bulkActions([
                 // ...
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->icon('heroicon-o-trash')
+                        ->color('danger')
+                        ->requiresConfirmation()
+                        ->action(
+                            function (Collection $records) {
+                                $records->each->delete();
+                                Notification::make()
+                                    ->title('Delete successfully')
+                                    ->success()
+                                    ->send();
+                            }
+                        )
+                        ->deselectRecordsAfterCompletion(),
                 ]),
             ]);
     }
