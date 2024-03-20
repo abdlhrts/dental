@@ -19,8 +19,8 @@
     </style>
 
     <!-- Scripts -->
-    @filamentStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @filamentStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -48,8 +48,7 @@
     @endauth
 
     @filamentScripts
-
-    @stack('scripts')
+    @include('layouts.partials.scripts')
 </body>
 
 </html>

@@ -25,8 +25,10 @@ class CreatePatientRegistration extends Component implements HasForms, HasAction
             ->label('New Registration')
             ->icon('heroicon-o-book-open')
             ->form([
-                Forms\Components\Grid::make(2)
+                Forms\Components\Grid::make(3)
                     ->schema([
+                        Forms\Components\TextInput::make('registration_number')
+                            ->required(),
                         Forms\Components\Select::make('patient_id')
                             ->searchable()
                             ->relationship('patient', 'name')

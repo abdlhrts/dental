@@ -10,11 +10,18 @@ use Filament\Actions;
 use Filament\Forms;
 use Filament\Support\Enums\ActionSize;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class CreateAnamnesa extends Component implements HasForms, HasActions
 {
     use InteractsWithActions;
     use InteractsWithForms;
+
+    #[On('createAction-clicked')]
+    public function handleCreateAction()
+    {
+        $this->createAction();
+    }
 
     public function createAction(): Actions\Action
     {

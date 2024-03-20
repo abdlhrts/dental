@@ -121,12 +121,3 @@
         </div>
     </div>
 </x-app-layout>
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        window.iniAlert(){
-            alert("fskdjf");
-        }
-    });
-</script>
-@endpush
