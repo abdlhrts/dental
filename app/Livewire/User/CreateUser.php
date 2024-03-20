@@ -27,53 +27,56 @@ class CreateUser extends Component implements HasForms
         return $form
             ->schema([
                 //
-                Forms\Components\Grid::make(3)
-                    ->schema([
-                        Forms\Components\Fieldset::make('Informasi User')
-                            ->columnSpan(2)
+                Forms\Components\Tabs::make('Tabs')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Informasi User')
                             ->schema([
-                                Forms\Components\TextInput::make('name')
-                                    ->required()
-                                    ->maxLength(255),
-                                Forms\Components\TextInput::make('email')
-                                    ->email()
-                                    ->required()
-                                    ->maxLength(255),
-                                Forms\Components\TextInput::make('password')
-                                    ->password()
-                                    ->revealable()
-                                    ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
-                                    ->required(),
-                                Forms\Components\DatePicker::make('email_verified_at'),
-                            ]),
-                        Forms\Components\Fieldset::make('profile')
-                            ->label('Profile')
-                            ->relationship('profile')
-                            ->columnSpan(1)
-                            ->columns(1)
-                            ->schema([
-                                Forms\Components\FileUpload::make('image')
-                                    ->directory('profile-picture')
-                                    ->image()
-                                    ->avatar()
-                                    ->circleCropper(),
-                                Forms\Components\Select::make('title')
-                                    ->required()
-                                    ->options([
-                                        'Super Admin' => 'Super Admin',
-                                        'Doctor' => 'Doctor',
-                                        'Nurse' => 'Nurse',
-                                        'Employee' => 'Employee',
-                                        'User' => 'User',
+                                Forms\Components\Fieldset::make('Informasi User')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('name')
+                                            ->required()
+                                            ->maxLength(255),
+                                        Forms\Components\TextInput::make('email')
+                                            ->email()
+                                            ->required()
+                                            ->maxLength(255),
+                                        Forms\Components\TextInput::make('password')
+                                            ->password()
+                                            ->revealable()
+                                            ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                                            ->required(),
+                                        Forms\Components\DatePicker::make('email_verified_at'),
+                                        Forms\Components\Select::make('roles')
+                                            ->multiple()
+                                            ->relationship('roles', 'name')
+                                            ->preload(),
                                     ]),
-                                Forms\Components\TextInput::make('phone_number')
-                                    ->prefix('+62')
-                                    ->tel()
-                                    ->required(),
-                                Forms\Components\Textarea::make('address'),
-                                Forms\Components\Textarea::make('description'),
                             ]),
-                    ])
+                        Forms\Components\Tabs\Tab::make('User Profile')
+                            ->schema([
+                                Forms\Components\Fieldset::make('profile')
+                                    ->label('Profile')
+                                    ->relationship('profile')
+                                    ->columns(2)
+                                    ->schema([
+                                        Forms\Components\FileUpload::make('image')
+                                            ->directory('profile-picture')
+                                            ->image()
+                                            ->avatar()
+                                            ->circleCropper()
+                                            ->columnSpan(2),
+                                        Forms\Components\TextInput::make('title')
+                                            ->required(),
+                                        Forms\Components\TextInput::make('phone_number')
+                                            ->prefix('+62')
+                                            ->tel()
+                                            ->required(),
+                                        Forms\Components\Textarea::make('address'),
+                                        Forms\Components\Textarea::make('description'),
+                                    ]),
+                            ])
+                    ]),
+
             ])
             ->statePath('data')
             ->model(User::class);

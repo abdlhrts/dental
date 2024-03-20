@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('user', App\Http\Controllers\UserController::class);
+    Route::view('role-permission', 'pages.role-permission.index')->name('role-permission.index');
+    Route::view('role-permission/create', 'pages.role-permission.create')->name('role-permission.create');
+
+    Route::view('/medical-record', 'pages.medical-record.index')->name('medical-record.index');
 
     Route::resource('patient', App\Http\Controllers\PatientController::class);
 });

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('registration_number')->unique();
             $table->foreignId('patient_id');
+            $table->foreignId('user_id');
             $table->enum('registration_status', ['waiting', 'treated', 'already home'])->default('waiting');
             $table->dateTime('admission_date')->nullable();
             $table->dateTime('discharge_date')->nullable();

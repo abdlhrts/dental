@@ -39,28 +39,34 @@ class ListUser extends Component implements HasForms, HasTable
                     ->label('Phone number')
                     ->searchable()
                     ->prefix('+62'),
-                TextColumn::make('profile.title')
-                    ->label('Title')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Super Admin' => 'info',
-                        'Doctor' => 'success',
-                        'Nurse' => 'warning',
-                        'Employee' => 'gray',
-                        'User' => 'danger',
-                    }),
+                TextColumn::make('roles.name')
+                    ->label('Role'),
+                // TextColumn::make('profile.title')
+                //     ->label('Title')
+                //     ->badge()
+                //     ->color(fn (string $state): string => match ($state) {
+                //         'Super Admin' => 'info',
+                //         'Doctor' => 'success',
+                //         'Nurse' => 'warning',
+                //         'Employee' => 'gray',
+                //         'User' => 'danger',
+                //     }),
             ])
             ->filters([
                 // ...
-                Tables\Filters\SelectFilter::make('title')
-                    ->options([
-                        'Super Admin' => 'Super Admin',
-                        'Doctor' => 'Doctor',
-                        'Nurse' => 'Nurse',
-                        'Employee' => 'Employee',
-                        'User' => 'User',
-                    ])
-                    ->attribute('profile.title'),
+                Tables\Filters\SelectFilter::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload(),
+                // Tables\Filters\SelectFilter::make('title')
+                //     ->options([
+                //         'Super Admin' => 'Super Admin',
+                //         'Doctor' => 'Doctor',
+                //         'Nurse' => 'Nurse',
+                //         'Employee' => 'Employee',
+                //         'User' => 'User',
+                //     ])
+                //     ->attribute('profile.title'),
                 Tables\Filters\TernaryFilter::make('email_verified_at')
                     ->nullable()
             ])

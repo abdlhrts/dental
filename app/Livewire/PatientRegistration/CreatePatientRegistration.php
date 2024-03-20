@@ -2,6 +2,7 @@
 
 namespace App\Livewire\PatientRegistration;
 
+use App\Models\PatientRegistration;
 use Filament\Forms;
 use Filament\Forms\Form;
 use App\Models\User;
@@ -20,11 +21,27 @@ class CreatePatientRegistration extends Component implements HasForms, HasAction
     public function createAction()
     {
         return Actions\CreateAction::make('create')
+            ->model(PatientRegistration::class)
+            ->label('New Registration')
+            ->icon('heroicon-o-book-open')
             ->form([
-                Forms\Components\TextInput::make('name'),
+                Forms\Components\Grid::make(2)
+                    ->schema([
+                        Forms\Components\Select::make('patient_id')
+                            ->searchable()
+                            ->relationship('patient', 'name')
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Select::make('user_id')
+                            ->label('Doctor')
+                            ->searchable()
+                            ->options(User::whereHas('roles', fn ($query) => $query->where('name', 'Doctor'))->pluck('name', 'id'))
+                            ->preload()
+                            ->required(),
+                    ])
             ])
             ->action(function (array $data): void {
-                $record = Diagnosa::create($data);
+                $record = PatientRegistration::create($data);
 
                 $this->form->model($record)->saveRelationships();
 

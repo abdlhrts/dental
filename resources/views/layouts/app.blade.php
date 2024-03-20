@@ -48,6 +48,8 @@
     @endauth
 
     @filamentScripts
+
+    @stack('scripts')
 </body>
 
 </html>

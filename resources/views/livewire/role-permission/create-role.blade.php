@@ -1,10 +1,10 @@
 <div>
-    <form wire:submit="save">
+    <form wire:submit="create">
         {{ $this->form }}
 
         <x-primary-button type="submit" class="mt-5">Submit</x-primary-button>
         <x-secondary-button>
-            <a href="{{ route('patient.index') }}">Cancel</a>
+            <a href="{{ route('role-permission.index') }}">Cancel</a>
         </x-secondary-button>
         <div role="status" wire:loading>
             <svg aria-hidden="true" class="inline w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
