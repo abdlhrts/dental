@@ -21,4 +21,14 @@ class PatientRegistration extends Model
     {
         return $this->belongsTo(Patient::class);
     }
+
+    /**
+     * Get the user that owns the PatientRegistration
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

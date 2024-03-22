@@ -2,14 +2,16 @@
 
 namespace App\Livewire\PatientRegistration;
 
-use App\Models\PatientRegistration;
+use App\Models\MedicalRecord;
 use Filament\Forms;
-use Filament\Forms\Form;
 use App\Models\User;
-use Livewire\Component;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Actions\Contracts\HasActions;
 use Filament\Actions;
+use Livewire\Component;
+use Filament\Forms\Form;
+use App\Models\PatientRegistration;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
+use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
 
@@ -44,6 +46,10 @@ class CreatePatientRegistration extends Component implements HasForms, HasAction
             ])
             ->action(function (array $data): void {
                 $record = PatientRegistration::create($data);
+
+                MedicalRecord::create([
+                    'patient_registration_id' => $record->id
+                ]);
 
                 $this->form->model($record)->saveRelationships();
 

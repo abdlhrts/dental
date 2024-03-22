@@ -24,6 +24,10 @@
                         :active="request()->routeIs('patient-registration.index')">
                         {{ __('Patient Registration') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('medical-record.index')"
+                        :active="request()->routeIs('medical-record.index')">
+                        {{ __('Medical Record') }}
+                    </x-nav-link>
                 </div>
             </div>
 

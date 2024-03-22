@@ -7,11 +7,12 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsOverview extends BaseWidget
 {
+    public $patients = 10;
     protected function getStats(): array
     {
         return [
             //
-            Stat::make('Unique views', '192.1k')
+            Stat::make('Unique views', $this->patients . ' Patients')
                 ->description('32k increase')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),

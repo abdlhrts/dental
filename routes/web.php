@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::view('role-permission/create', 'pages.role-permission.create')->name('role-permission.create');
 
     Route::view('/medical-record', 'pages.medical-record.index')->name('medical-record.index');
+    Route::resource('/medical-record', App\Http\Controllers\MedicalRecordController::class)->except(['index']);
 
     Route::resource('patient', App\Http\Controllers\PatientController::class);
 });
