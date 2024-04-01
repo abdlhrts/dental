@@ -256,7 +256,7 @@
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
                     <img class="w-8 h-8 rounded-full"
-                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                        src="{{ auth()->user()->profile->image ? env('APP_URL') . '/storage' . '/' . auth()->user()->profile->image : 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png' }}"
                         alt="user photo" />
                 </button>
                 <!-- Dropdown menu -->
