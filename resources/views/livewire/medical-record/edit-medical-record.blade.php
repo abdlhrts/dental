@@ -29,7 +29,7 @@
                                     </div>
                                     <h3 class="mb-2 text-xl font-bold dark:text-white">
                                         <span class="cursor-pointer" wire:click="triggerTreatment()">
-                                            Anamnesa</span>
+                                            Treatment</span>
                                     </h3>
                                     <p class="text-gray-500 dark:text-gray-400">Protect your organization, devices and
                                         stay compliant with

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\MedicalRecord;
 
+use App\Models\Treatment;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -31,7 +32,11 @@ class CreateTreatment extends Component implements HasForms, HasActions
             ->iconButton()
             ->color('success')
             ->form([
-                Forms\Components\TextInput::make('treatment')
+                Forms\Components\Select::make('treatment')
+                    ->options(Treatment::all()->pluck('treatment_name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->multiple()
                     ->autofocus(),
             ]);
     }

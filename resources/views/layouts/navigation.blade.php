@@ -109,10 +109,11 @@
                     </svg>
                 </button>
 
+                @role('Super Admin')
                 <!-- Apps -->
                 <button type="button" data-dropdown-toggle="apps-dropdown"
                     class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                    <span class="sr-only">View notifications</span>
+                    <span class="sr-only">Apps</span>
                     <!-- Icon -->
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -120,6 +121,7 @@
                         </path>
                     </svg>
                 </button>
+
                 <!-- Dropdown menu -->
                 <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                     id="apps-dropdown">
@@ -247,6 +249,8 @@
                         </a>
                     </div>
                 </div>
+                @endrole
+
                 <button type="button"
                     class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">

@@ -18,6 +18,19 @@ class EditMedicalRecord extends Component implements HasForms
 
     public $record;
 
+    public function triggerAnamnesa()
+    {
+        // dd("ini klik");
+
+        $this->dispatch('createActionAnamnesa-clicked');
+    }
+
+    public function triggerTreatment()
+    {
+        // dd("ini klik");
+        $this->dispatch('createActionTreatment-clicked');
+    }
+
     public function mount($record): void
     {
         $this->record = $record;
