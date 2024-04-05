@@ -17,9 +17,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @role('Super Admin')
                     <x-nav-link :href="route('master-data.index')" :active="request()->routeIs('master-data.index')">
                         {{ __('Master Data') }}
                     </x-nav-link>
+                    @endrole
                     <x-nav-link :href="route('patient-registration.index')"
                         :active="request()->routeIs('patient-registration.index')">
                         {{ __('Patient Registration') }}
@@ -47,7 +49,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </button>
-                <!-- Dropdown -->
+                <!-- Toggle Theme -->
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                     id="language-dropdown-menu">
                     <ul class="py-2 font-medium" role="none">
@@ -259,8 +261,8 @@
                         src="{{ auth()->user()->profile->image ? env('APP_URL') . '/storage' . '/' . auth()->user()->profile->image : 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png' }}"
                         alt="user photo" />
                 </button>
-                <!-- Dropdown menu -->
-                <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+                <!-- Dropdown menu user profile -->
+                <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                     id="dropdown">
                     <div class="py-3 px-4">
                         <span class="block text-sm font-semibold text-gray-900 dark:text-white">{{
@@ -364,6 +366,19 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            @role('Super Admin')
+            <x-responsive-nav-link :href="route('master-data.index')" :active="request()->routeIs('master-data.index')">
+                {{ __('Master Data') }}
+            </x-responsive-nav-link>
+            @endrole
+            <x-responsive-nav-link :href="route('patient-registration.index')"
+                :active="request()->routeIs('patient-registration.index')">
+                {{ __('Patient Registration') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('medical-record.index')"
+                :active="request()->routeIs('medical-record.index')">
+                {{ __('Patient Registration') }}
             </x-responsive-nav-link>
         </div>
 
